@@ -26,18 +26,7 @@ object StepFunctionInvoker {
 
     val result: StartExecutionResult = client.startExecution(request)
 
-    val describeReq = new DescribeExecutionRequest()
-      .withExecutionArn(result.getExecutionArn)
-
-    var status: DescribeExecutionResult = null
-    do {
-      Thread.sleep(500)
-      status = client.describeExecution(describeReq)
-      println(status.getStatus)
-    }
-    while (status.getStatus == "RUNNING")
-
-    status.getStatus
+    result.getExecutionArn
   }
 
 }
